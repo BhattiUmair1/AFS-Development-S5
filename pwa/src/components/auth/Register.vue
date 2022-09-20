@@ -23,6 +23,7 @@
             type="text"
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
             id="name"
+            v-model="userInput.name"
           />
         </label>
       </div>
@@ -34,6 +35,7 @@
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
             id="email"
             autocomplete="email"
+            v-model="userInput.email"
           />
         </label>
       </div>
@@ -45,12 +47,14 @@
             type="password"
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
             id="password"
+            v-model="userInput.password"
           />
         </label>
       </div>
       <button
-        class="justify-center-rounded-md mt-6 flex h-20 w-full items-center bg-neutral-700 py-2 px-3 text-white outline-none ring-neutral-300"
-        :Disabled="loading"
+        class="justify-center-rounded-md h-15 mt-6 flex w-full items-center justify-center bg-neutral-700 py-2 px-3 text-white outline-none ring-neutral-300"
+        @click="submitForm"
+        :disabled="loading"
       >
         <span v-if="true">Create account</span>
         <div v-else>
@@ -70,19 +74,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue'
+import { defineComponent, reactive, ref, Ref } from 'vue'
 import { X, Loader2 } from 'lucide-vue-next'
+import useAuthetication from '../../composables/useAuthentication'
 export default defineComponent({
   components: {
     X,
     Loader2,
   },
   setup() {
+    const { register } = useAuthetication()
     const errorMessage: Ref<string> = ref('Something went wrong')
-    const loading: Boolean = false
+    const loading: Ref = ref(false)
+    const userInput = reactive({
+      name: '',
+      email: '',
+      password: '',
+    })
+
+    const submitForm = () => {
+      loading.value = true
+      register(userInput.name, userInput.email, userInput.password)
+        .then((user) => console.log(user))
+        .catch((err) => console.log(err))
+        .finally(() => (loading.value = false))
+    }
     return {
       errorMessage,
       loading,
+      userInput,
+      submitForm,
     }
   },
 })
