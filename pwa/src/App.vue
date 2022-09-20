@@ -1,9 +1,15 @@
 <template>
-  <div class="uppercase text-red-600">
-    <RouterView></RouterView>
-  </div>
+  <!-- <div class="uppercase text-red-600"> -->
+  <RouterView></RouterView>
+  <!-- </div> -->
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import useFirebase from './composables/useFirebase'
+export default {
+  setup() {
+    const { app } = useFirebase()
+    console.log(app)
+  },
+}
 </script>
-

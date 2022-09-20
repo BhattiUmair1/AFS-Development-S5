@@ -1,9 +1,10 @@
 import { App as VueApp, createApp } from 'vue'
 import App from './App.vue'
-// import '@unocss/tailwind.css'
+import '@unocss/reset/tailwind.css'
 import 'uno.css'
 import router from './bootstrap/router'
 
 const app: VueApp = createApp(App)
+// console.log(import.meta.env)
 app.use(router)
 app.mount('#app')

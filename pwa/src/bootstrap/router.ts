@@ -40,15 +40,15 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../components/holders/AuthHolder.vue'),
     children: [
       {
-        path: '/login',
+        path: '/auth/login',
         component: () => import('../components/auth/Login.vue'),
       },
       {
-        path: '/register',
+        path: '/auth/register',
         component: () => import('../components/auth/Register.vue'),
       },
       {
-        path: '/forgotpassword',
+        path: '/auth/forgotpassword',
         component: () => import('../components/auth/ForgotPassword.vue'),
       },
     ],
