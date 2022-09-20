@@ -1,0 +1,25 @@
+{
+  "name": "afs-development-s5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "npm run dev -w pwa"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhattiUmair1/AFS-Development-S5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BhattiUmair1/AFS-Development-S5/issues"
+  },
+  "homepage": "https://github.com/BhattiUmair1/AFS-Development-S5#readme",
+  "workspaces": [
+    "pwa"
+  ]
+}

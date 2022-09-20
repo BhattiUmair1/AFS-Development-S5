@@ -1,0 +1,2 @@
+# overal waar er nood modules zijn, ignore ze
+**/node_modules/
