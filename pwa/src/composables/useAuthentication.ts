@@ -51,31 +51,32 @@ export default () => {
   //todo: restore auth
   const restoreUser = () => {
     return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user)
-                resolve("")
-            } else {
-                reject()
-            }
-          });
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setUser(user)
+          resolve('')
+        } else {
+          reject()
+        }
       })
-
+    })
   }
-
   //todo: forgot password
   const passwordReset = async (email: string) => {
     return new Promise((resolve, reject) => {
-        sendPasswordResetEmail(auth, email).then(() => {
-            resolve("")
-        }).catch(() => {
-            reject()
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          resolve('')
+        })
+        .catch(() => {
+          reject()
         })
     })
   }
   //todo: track user
   return {
     register,
+    login,
     restoreUser,
     user,
   }

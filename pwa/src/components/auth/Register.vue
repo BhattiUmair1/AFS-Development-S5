@@ -1,8 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="">
-      <header>
-        <h2>Register</h2>
+      <header class="mb-3">
+        <h2 class="text-7">Register</h2>
       </header>
       <div
         v-if="errorMessage"
@@ -10,15 +10,15 @@
       >
         <p class="text-sm text-red-600">{{ errorMessage }}</p>
         <button
+          class="rounded-full border-2 border-red-100 p-2 outline-none hover:bg-red-200 active:border-red-600"
           @click="errorMessage = ''"
-          class=":hover-bg-red-600 rounded-full border-none bg-red-100 outline-none"
         >
-          <X class="p-3"></X>
+          <X class="point text-red-600"></X>
         </button>
       </div>
       <div>
         <label for="name" class="mb-1 block focus-within:text-neutral-900">
-          <span class="mb-2 block">name</span>
+          <span class="mb-1 block">name</span>
           <input
             type="text"
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
@@ -29,7 +29,7 @@
       </div>
       <div class="mt-3">
         <label for="email" class="mb-1 block focus-within:text-neutral-900">
-          <span class="mb-2 block">email</span>
+          <span class="mb-1 block">email</span>
           <input
             type="email"
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
@@ -39,10 +39,9 @@
           />
         </label>
       </div>
-
       <div class="mt-3">
         <label for="password" class="mb-1 block focus-within:text-neutral-900">
-          <span class="mb-2 block">password</span>
+          <span class="mb-1 block">password</span>
           <input
             type="password"
             class="rounded-mb w-full border border-neutral-200 px-3 py-1 text-neutral-800 outline-none ring-neutral-300 focus-visible:ring"
@@ -52,11 +51,11 @@
         </label>
       </div>
       <button
-        class="justify-center-rounded-md h-15 mt-6 flex w-full items-center justify-center bg-neutral-700 py-2 px-3 text-white outline-none ring-neutral-300"
-        @click="submitForm"
+        class="h-15 mt-6 flex w-full items-center justify-center rounded-md bg-neutral-700 py-2 px-3 text-white outline-none ring-neutral-300 hover:bg-neutral-800 active:bg-neutral-600"
         :disabled="loading"
+        @click="submitForm"
       >
-        <span v-if="true">Create account</span>
+        <span v-if="!loading">Create account</span>
         <div v-else>
           <Loader2 class="animate-spin" />
         </div>

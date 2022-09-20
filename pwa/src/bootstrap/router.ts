@@ -2,12 +2,13 @@ import { User } from 'lucide-vue-next'
 import {
   createRouter,
   createWebHistory,
+  RouteLocationNormalized,
   Router,
   RouteRecordRaw,
 } from 'vue-router'
 import useAuthentication from '../composables/useAuthentication'
 
-const { user } = useAuthentication
+const { user } = useAuthentication()
 
 const routes: RouteRecordRaw[] = [
   {
@@ -15,10 +16,6 @@ const routes: RouteRecordRaw[] = [
     name: 'Home',
     component: () => import('../components/holders/AppHolder.vue'),
     children: [
-      {
-        path: '/index',
-        component: () => import('../screens/birds/index.vue'),
-      },
       {
         path: '/locations',
         component: () => import('../screens/locations/locations.vue'),
@@ -32,24 +29,31 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../screens/observations/observations.vue'),
         meta: {
           needsAuthentication: true,
-        }
+        },
       },
       {
         path: '/logs',
         component: () => import('../screens/logs/logs.vue'),
         meta: {
           needsAuthentication: true,
-        }
+        },
       },
       {
         path: '/account',
         component: () => import('../screens/Account.vue'),
         meta: {
           needsAuthentication: true,
-        }
-      }
+        },
+      },
     ],
   },
+
+
+  //auth => redirect to login
+  //auth/login
+  //auth/register
+  //auth/forgot-password
+  //auth/auth/forgot-password
   {
     path: '/auth',
     name: 'ClientError',
@@ -60,15 +64,15 @@ const routes: RouteRecordRaw[] = [
         path: '/auth/login',
         component: () => import('../components/auth/Login.vue'),
         meta: {
-          cantAuthenication: true
-        }
+          cantAuthenication: true,
+        },
       },
       {
         path: '/auth/register',
         component: () => import('../components/auth/Register.vue'),
         meta: {
-          cantAuthenication: true
-        }
+          cantAuthenication: true,
+        },
       },
       {
         path: '/auth/forgotpassword',
@@ -78,24 +82,21 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
-//auth => redirect to login
-//auth/login
-//auth/register
-//auth/forgot-password
-//auth/auth/forgot-password
-
 const router: Router = createRouter({
   history: createWebHistory(),
   routes,
 })
 
-router.beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
-  if (to.meta.needsAuthentication) {
-    return '/auth/login'
-  }
-  if (to.meta.cantAuthenication && user.value) {
-    return '/'
-  }
-}
+// Dit nog eens bekijken
+router.beforeEach(
+  (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+    if (to.meta.needsAuthentication) {
+      return to.fullPath.toString()
+    }
+    // if (to.meta.cantAuthenication && user.value) {
+    //   return '/'
+    // }
+  },
+)
 
 export default router
